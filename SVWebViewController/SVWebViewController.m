@@ -176,7 +176,6 @@
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        CGFloat toolbarWidth = 250.0f;
         fixedSpace.width = 35.0f;
         
         NSArray *items = [NSArray arrayWithObjects:
@@ -190,10 +189,8 @@
                           self.actionBarButtonItem,
                           nil];
         
-        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, toolbarWidth, 44.0f)];
-        toolbar.items = items;
-        toolbar.barStyle = self.navigationController.navigationBar.barStyle;
-        toolbar.tintColor = self.navigationController.navigationBar.tintColor;
+        self.navigationToolbar.items = items;
+        
         self.navigationItem.rightBarButtonItems = items.reverseObjectEnumerator.allObjects;
     }
     
@@ -210,8 +207,11 @@
                           fixedSpace,
                           nil];
         
-        self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
-        self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
+        self.navigationController.toolbar.barStyle = self.navigationToolbar.barStyle;
+        self.navigationController.toolbar.tintColor = self.navigationToolbar.tintColor;
+        self.navigationController.toolbar.translucent = self.navigationToolbar.translucent;
+        self.navigationController.toolbar.barTintColor = self.navigationToolbar.barTintColor;
+        
         self.toolbarItems = items;
     }
 }
@@ -306,6 +306,13 @@
 
 - (void)doneButtonTapped:(id)sùender {
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (UIToolbar *)navigationToolbar {
+    if (!_navigationToolbar) {
+        _navigationToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.bounds.size.width, 44.0f)];
+    }
+    return _navigationToolbar;
 }
 
 @end
