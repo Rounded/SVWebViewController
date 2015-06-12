@@ -189,7 +189,7 @@
                           self.actionBarButtonItem,
                           nil];
         
-        self.navigationToolbar.items = items;
+        self.bottomToolbar.items = items;
         
         self.navigationItem.rightBarButtonItems = items.reverseObjectEnumerator.allObjects;
     }
@@ -207,10 +207,10 @@
                           fixedSpace,
                           nil];
         
-        self.navigationController.toolbar.barStyle = self.navigationToolbar.barStyle;
-        self.navigationController.toolbar.tintColor = self.navigationToolbar.tintColor;
-        self.navigationController.toolbar.translucent = self.navigationToolbar.translucent;
-        self.navigationController.toolbar.barTintColor = self.navigationToolbar.barTintColor;
+        self.navigationController.toolbar.barStyle = self.bottomToolbar.barStyle;
+        self.navigationController.toolbar.tintColor = self.bottomToolbar.tintColor;
+        self.navigationController.toolbar.translucent = self.bottomToolbar.translucent;
+        self.navigationController.toolbar.barTintColor = self.bottomToolbar.barTintColor;
         
         self.toolbarItems = items;
     }
@@ -308,11 +308,11 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (UIToolbar *)navigationToolbar {
-    if (!_navigationToolbar) {
-        _navigationToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.bounds.size.width, 44.0f)];
+- (UIToolbar *)bottomToolbar {
+    if (!_bottomToolbar) {
+        _bottomToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.bounds.size.width, 44.0f)];
     }
-    return _navigationToolbar;
+    return _bottomToolbar;
 }
 
 @end
